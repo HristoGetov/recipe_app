@@ -1,9 +1,7 @@
 package com.recipe.app.recipe_app.model;
 
-import lombok.Data;
 import javax.persistence.*;
 
-@Data
 @Entity
 public class Notes {
 
