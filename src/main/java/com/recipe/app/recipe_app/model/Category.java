@@ -7,7 +7,7 @@ import java.util.Set;
 
 
 @Entity
-public class Category {
+public class Category{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,7 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes = new HashSet<>();
+
 
     public Long getId() {
         return id;
