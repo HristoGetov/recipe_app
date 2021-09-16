@@ -52,7 +52,7 @@ body{
     border: black;
 }
 
-a {
+#buttonView {
     background-color: forestgreen;
     color: white;
     padding: 3px;
