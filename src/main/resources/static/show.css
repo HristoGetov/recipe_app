@@ -52,3 +52,25 @@ body{
     margin-top: 60px;
     margin-left: 22%
 }
+
+#url{
+  
+    display:inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 13ch;
+     
+}
+
+
+#buttonView {
+    background-color: forestgreen;
+    color: white;
+    padding: 3px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid black;
+       margin-left: 90%;
+}
+

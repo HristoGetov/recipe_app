@@ -72,6 +72,17 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         if(!cupsUomOptional.isPresent()){
             throw new RuntimeException("Expected UOM Not Found");
         }
+        Optional<UnitOfMeasure> gramUomOptional = unitOfMeasureRepository.findByDescription("Gram");
+
+        if(!gramUomOptional.isPresent()){
+            throw new RuntimeException("Expected UOM Not Found");
+        }
+        
+        Optional<UnitOfMeasure> milUomOptional = unitOfMeasureRepository.findByDescription("mll");
+
+        if(!milUomOptional.isPresent()){
+            throw new RuntimeException("Expected UOM Not Found");
+        }
 
         //get optionals
         UnitOfMeasure eachUom = eachUomOptional.get();
@@ -80,6 +91,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         UnitOfMeasure dashUom = dashUomOptional.get();
         UnitOfMeasure pintUom = pintUomOptional.get();
         UnitOfMeasure cupsUom = cupsUomOptional.get();
+        UnitOfMeasure gramUom = gramUomOptional.get();
+        UnitOfMeasure milUom = milUomOptional.get();
 
         //get Categories
         Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("American");
@@ -93,9 +106,16 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         if(!mexicanCategoryOptional.isPresent()){
             throw new RuntimeException("Expected Category Not Found");
         }
+        
+         Optional<Category> bulgarianCategoryOptional = categoryRepository.findByDescription("Bulgarian");
+
+        if(!bulgarianCategoryOptional.isPresent()){
+            throw new RuntimeException("Expected Category Not Found");
+        }
 
         Category americanCategory = americanCategoryOptional.get();
         Category mexicanCategory = mexicanCategoryOptional.get();
+        Category bulgarianCategory = bulgarianCategoryOptional.get();
 
         //Yummy Guac
         Recipe guacRecipe = new Recipe();
@@ -127,7 +147,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         guacRecipe.setNotes(guacNotes);
 
-        guacRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom));
+        guacRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(600), eachUom));
         guacRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), teapoonUom));
         guacRecipe.addIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2), tableSpoonUom));
         guacRecipe.addIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tableSpoonUom));
@@ -204,6 +224,42 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.getCategories().add(mexicanCategory);
 
         recipes.add(tacosRecipe);
+        
+        
+        
+         //Yummy Bread
+        Recipe breadRecipe = new Recipe();
+        breadRecipe.setDescription("Bread for home bakery");
+        breadRecipe.setCookTime(190);
+        breadRecipe.setPrepTime(10);
+        breadRecipe.setDifficulty(Difficulty.EASY);
+
+        breadRecipe.setDirections("Firstly, you need to fill up the pot of the home bakery with with water with room temperature. " + "\n"
+                + "Than you need to add salt, sugar and flour in a way to cover the water."
+                + " \n" + "On top of the flour you need to add the bread yeast and than the program of the Home Bakery has to be set for 1 kilo bread.");
+
+        Notes breadNotes = new Notes();
+        breadNotes.setRecipeNotes( "After the program is over, the bread has to be takken out and wrapped in a towel. "
+                + "\n" + "Different type of seeds could be added to the bread before baking.");
+
+        breadRecipe.setNotes(breadNotes);
+
+
+        breadRecipe.addIngredient(new Ingredient("Flour", new BigDecimal(600), gramUom));
+        breadRecipe.addIngredient(new Ingredient("Waatter", new BigDecimal(320), milUom));
+        breadRecipe.addIngredient(new Ingredient("Sunflower Oil", new BigDecimal(2), tableSpoonUom));
+        breadRecipe.addIngredient(new Ingredient("Sugar", new BigDecimal(1), teapoonUom));
+        breadRecipe.addIngredient(new Ingredient("Salt", new BigDecimal(2), teapoonUom));
+        breadRecipe.addIngredient(new Ingredient("Bread Yeast", new BigDecimal(7), gramUom));
+        breadRecipe.addIngredient(new Ingredient("Seeds (Optional)", new BigDecimal(2), tableSpoonUom));
+
+        breadRecipe.getCategories().add(bulgarianCategory);
+        breadRecipe.setUrl("https://receptite.com/%D1%80%D0%B5%D1%86%D0%B5%D0%BF%D1%82%D0%B0/%D1%85%D0%BB%D1%8F%D0%B1-%D0%B2-%D0%B4%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B0-%D1%85%D0%BB%D0%B5%D0%B1%D0%BE%D0%BF%D0%B5%D0%BA%D0%B0%D1%80%D0%BD%D0%B0");
+        breadRecipe.setServings(8);
+        breadRecipe.setSource("Happy Cook");
+
+        recipes.add(breadRecipe);
+
         return recipes;
     }
 }

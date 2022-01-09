@@ -60,8 +60,30 @@ body{
     border-radius: 8px;
     border: 1px solid black;
 }
+
+#deleteButtonView {
+    background-color: red;
+    color: white;
+    padding: 3px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+#updateButtonView {
+    background-color: darkorange;
+    color: white;
+    padding: 3px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid black;
+}
 a:hover {
     background-color: white;
     color: black;
 
+}
+
+#new{
+    margin-left: 80%;
 }
